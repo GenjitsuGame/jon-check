@@ -6,8 +6,11 @@ import mutations from './mutations'
 
 Vue.use(Vuex)
 
-const state = {
-  tracks: []
+export const state = {
+  tracks: [],
+  fetching: {
+    tracks: false
+  }
 }
 
 export default new Vuex.Store({
