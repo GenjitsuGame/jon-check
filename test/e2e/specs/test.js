@@ -8,8 +8,8 @@ module.exports = {
     // see nightwatch.conf.js
     const devServer = browser.globals.devServerURL
 
-    browser
-      .url(devServer)
+    // browser
+      // .url(devServer)
       // .waitForElementVisible('#app', 5000)
   }
 }
