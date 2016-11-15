@@ -1,6 +1,6 @@
 # jon-check
 
-[![](https://david-dm.org/genjitsugame/jon-check/status.svg)](https://david-dm.org/genjitsugame/jon-check)[![](https://david-dm.org/genjitsugame/jon-check/dev-status.svg)](https://david-dm.org/genjitsugame/jon-check?type=dev)
+[![Build Status](https://travis-ci.org/GenjitsuGame/jon-check.svg?branch=master)](https://travis-ci.org/GenjitsuGame/jon-check)[![](https://david-dm.org/genjitsugame/jon-check/status.svg)](https://david-dm.org/genjitsugame/jon-check)[![](https://david-dm.org/genjitsugame/jon-check/dev-status.svg)](https://david-dm.org/genjitsugame/jon-check?type=dev)
 
 > A Vue.js project
 
