@@ -7,9 +7,12 @@ import mutations from './mutations'
 Vue.use(Vuex)
 
 export const state = {
-  tracks: [],
-  fetching: {
-    tracks: false
+  globals: {
+    apiRoot: 'http://localhost:4100'
+  },
+  tracks: {
+    data: [],
+    fetching: false
   }
 }
 

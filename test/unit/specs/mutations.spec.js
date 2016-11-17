@@ -16,20 +16,20 @@ describe('mutations', () => {
   })
 
   it('GET_TRACKS_REQUEST', () => {
-    expect(_state.fetching.tracks).to.be.false
+    expect(_state.tracks.fetching).to.be.false
     GET_TRACKS_REQUEST(_state)
-    expect(_state.fetching.tracks).to.be.true
+    expect(_state.tracks.fetching).to.be.true
   })
 
   it('GET_TRACKS_SUCCESS', () => {
-    expect(_state.tracks).to.have.length(0)
+    expect(_state.tracks.data).to.have.length(0)
     GET_TRACKS_SUCCESS(_state, tracks)
-    expect(_state.tracks).to.have.length(tracks.length)
+    expect(_state.tracks.data).to.have.length(tracks.length)
   })
 
   it('GET_TRACKS_FAILURE', () => {
-    expect(_state.fetching.tracks).to.be.false
+    expect(_state.tracks.fetching).to.be.false
     GET_TRACKS_FAILURE(_state)
-    expect(_state.fetching.tracks).to.be.false
+    expect(_state.tracks.fetching).to.be.false
   })
 })

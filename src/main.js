@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import VueResource from 'vue-resource'
 import App from './App'
 import store from './store'
 import {getAllTracks} from './store/actions'
@@ -11,5 +12,7 @@ new Vue({
 })
 
 if (process.env.NODE_ENV !== 'testing') {
+  Vue.use(VueResource)
+  Vue.http.options.root = 'http://localhost:4100'
   getAllTracks(store)
 }
