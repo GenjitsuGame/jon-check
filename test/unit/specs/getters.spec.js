@@ -33,4 +33,15 @@ describe('getters', () => {
 
     expect(getters.isFetchingTracks(state)).to.be.true
   })
+
+  it('currentTrack', () => {
+    const currentTrack = 'id'
+    const state = {
+      player: {
+        currentTrack
+      }
+    }
+
+    expect(getters.currentTrack(state)).to.equal(currentTrack)
+  })
 })

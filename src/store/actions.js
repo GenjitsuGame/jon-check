@@ -3,9 +3,11 @@ import * as types from './mutation-types'
 
 export const getAllTracks = async ({commit}) => {
   commit(types.GET_TRACKS_REQUEST)
-  try {
-    commit(types.GET_TRACKS_SUCCESS, await api.getTracks())
-  } catch (e) {
-    commit(types.GET_TRACKS_FAILURE)
-  }
+  await api.getTracks('', null, 100)
+    .then(body => commit(types.GET_TRACKS_SUCCESS, body.data))
+    .catch(() => commit(types.GET_TRACKS_FAILURE))
+}
+
+export const selectCurrentTrack = async ({commit}, id) => {
+  commit(types.SELECT_CURRENT_TRACK, id)
 }

@@ -1,11 +1,14 @@
 export const tracks = [
   {
+    _id: 'id1',
     title: 'title1'
   },
   {
+    _id: 'id2',
     title: 'title2'
   },
   {
+    _id: 'id3',
     title: 'title3'
   }
 ]

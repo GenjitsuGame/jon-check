@@ -11,8 +11,11 @@ export const state = {
     apiRoot: 'http://localhost:4100'
   },
   tracks: {
-    data: [],
+    data: {},
     fetching: false
+  },
+  player: {
+    currentTrack: null
   }
 }
 

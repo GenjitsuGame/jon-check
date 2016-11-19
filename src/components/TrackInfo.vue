@@ -1,6 +1,6 @@
 <template>
   <tr class="track-info-tr">
-    <td class="col-md-1">
+    <td class="col-md-1 track-thumbnail-col" v-on:click="selectCurrentTrack(track._id)">
       <img v-if="track.covers.length" class="track-thumbnail fill" :src="apiRoot + track.covers[0]" alt="">
       <img v-else class="fill" src="../assets/default-song.png" alt="">
     </td>
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import {mapGetters} from 'vuex'
+  import {mapGetters, mapActions} from 'vuex'
 
   export default {
     name: 'TrackInfo',
@@ -22,11 +22,19 @@
       ...mapGetters([
         'apiRoot'
       ])
+    },
+    methods: {
+      ...mapActions([
+        'selectCurrentTrack'
+      ])
     }
   }
 </script>
 
 <style src="../css/styles.css"></style>
 <style>
+  .track-thumbnail-col {
+    padding: 0 !important;
+  }
 
 </style>

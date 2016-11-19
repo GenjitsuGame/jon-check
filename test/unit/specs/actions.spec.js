@@ -15,6 +15,18 @@ const actions = actionsInjector({
   }
 })
 
+const actionFail = actionsInjector({
+  '../api': {
+    getTracks: () => {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          reject(new Error())
+        }, 500)
+      })
+    }
+  }
+})
+
 // helper for testing action with expected mutations
 const testAction = async (action, payload, state, expectedMutations, done) => {
   let count = 0
@@ -52,6 +64,19 @@ describe('actions', () => {
     testAction(actions.getAllTracks, null, _state, [
       {type: 'GET_TRACKS_REQUEST'},
       {type: 'GET_TRACKS_SUCCESS', payload: tracks}
+    ], done)
+  })
+
+  it('getTracks failure', done => {
+    testAction(actionFail.getAllTracks, null, _state, [
+      {type: 'GET_TRACKS_REQUEST'},
+      {type: 'GET_TRACKS_FAILURE'}
+    ], done)
+  })
+
+  it('getCurrentTrack', done => {
+    testAction(actions.selectCurrentTrack, 'id', _state, [
+      {type: 'SELECT_CURRENT_TRACK', payload: 'id'}
     ], done)
   })
 })
