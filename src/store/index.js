@@ -8,14 +8,20 @@ Vue.use(Vuex)
 
 export const state = {
   globals: {
-    apiRoot: 'http://localhost:4100'
+    apiRoot: 'http://localhost:4100/api/'
   },
   tracks: {
     data: {},
     fetching: false
   },
+  playlists: {
+    data: [],
+    fetching: false
+  },
   player: {
-    currentTrack: null
+    queue: [],
+    showQueue: true,
+    index: 0
   }
 }
 

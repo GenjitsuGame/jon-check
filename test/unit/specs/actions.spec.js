@@ -60,15 +60,17 @@ describe('actions', () => {
     _state = JSON.parse(JSON.stringify(state))
   })
 
-  it('getTracks', done => {
+  it('getAllTracks', done => {
     testAction(actions.getAllTracks, null, _state, [
+      {type: 'GET_TRACKS_ABORT'},
       {type: 'GET_TRACKS_REQUEST'},
       {type: 'GET_TRACKS_SUCCESS', payload: tracks}
     ], done)
   })
 
-  it('getTracks failure', done => {
+  it('getAllTracks failure', done => {
     testAction(actionFail.getAllTracks, null, _state, [
+      {type: 'GET_TRACKS_ABORT'},
       {type: 'GET_TRACKS_REQUEST'},
       {type: 'GET_TRACKS_FAILURE'}
     ], done)
