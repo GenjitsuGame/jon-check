@@ -12,7 +12,8 @@ export const state = {
   },
   tracks: {
     data: {},
-    fetching: false
+    fetching: false,
+    index: 0
   },
   playlists: {
     data: [],

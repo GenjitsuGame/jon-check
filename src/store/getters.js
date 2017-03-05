@@ -2,6 +2,7 @@ export const apiRoot = state => state.globals.apiRoot
 
 export const tracks = state => state.tracks.data
 export const isFetchingTracks = state => state.tracks.fetching
+export const trackIndex = state => state.tracks.index
 
 export const currentTrack = state => state.player.queue[state.player.index]
 export const queue = state => state.player.queue

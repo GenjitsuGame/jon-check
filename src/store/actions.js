@@ -1,6 +1,12 @@
 import * as api from '../api'
 import * as types from './mutation-types'
 
+
+export const getTrack = async({commit}, id) => {
+  await api.getTrack(id)
+    .then(body => commit)
+}
+
 export const getAllTracks = async ({commit}) => {
   await getTracks({commit})
 }
@@ -13,8 +19,12 @@ export const getTracks = async ({commit}, q) => {
     .catch(() => commit(types.GET_TRACKS_FAILURE))
 }
 
-export const selectCurrentTrack = async ({commit}, id) => {
-  commit(types.SELECT_CURRENT_TRACK, id)
+export const getPlaylists = async ({commit}) => {
+  commit(types.GET_PLAYLISTS_ABORT)
+  commit(types.GET_PLAYLISTS_REQUEST)
+  return await api.getPlaylists()
+    .then(body => commit(types.GET_PLAYLISTS_SUCCESS, body.data))
+    .catch(() => commit(types.GET_PLAYLISTS_FAILURE))
 }
 
 export const addTracksToQueue = ({commit}, tracks) => {
@@ -22,15 +32,11 @@ export const addTracksToQueue = ({commit}, tracks) => {
 }
 
 export const addPlaylistToQueue = ({commit}, playlist) => {
-  addTracksToQueue({commit}, playlist.map(track => track._id))
+  addTracksToQueue({commit}, playlist)
 }
 
-export const getPlaylists = async ({commit}) => {
-  commit(types.GET_PLAYLISTS_ABORT)
-  commit(types.GET_PLAYLISTS_REQUEST)
-  return await api.getPlaylists()
-    .then(body => commit(types.GET_PLAYLISTS_SUCCESS, body.data))
-    .catch(() => commit(types.GET_PLAYLISTS_FAILURE))
+export const setTrackIndex = ({commit}, index) => {
+  commit(types.SET_TRACK_INDEX, index)
 }
 
 export const nextSong = ({commit}, n = 1) => {
@@ -45,6 +51,8 @@ export const clearQueue = ({commit}) => {
 
 export const updateApiRoot = ({commit}, apiRoot) => {
   commit(types.UPDATE_API_ROOT, apiRoot)
+  getAllTracks({commit})
+  getPlaylists({commit})
 }
 
 export const toggleQueue = ({commit}) => {

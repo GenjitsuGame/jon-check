@@ -1,5 +1,11 @@
 import Vue from 'vue'
 
+export const getTrack = (id) => {
+  return Vue.http
+    .get('tracks/' + id)
+    .then(response => response.body)
+}
+
 export const getTracks = (q, skip, limit) => {
   return Vue.http
     .get('tracks', {

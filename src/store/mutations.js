@@ -38,8 +38,8 @@ export default {
     state.playlists.fetching = false
   },
 
-  [types.SELECT_CURRENT_TRACK] (state, trackId) {
-    state.player.queue.push(trackId)
+  [types.SET_TRACK_INDEX] (state, index) {
+    state.tracks.index = index
   },
 
   [types.ADD_TRACKS_TO_QUEUE] (state, tracks) {

@@ -9,7 +9,7 @@
     </div>
 
     <div>
-      <button v-on:click="toggleQueue">{{ showQueue ? 'hide' : 'show'}} playlist</button>
+      <button v-on:click="toggleQueue">{{ showQueue ? 'hide' : 'show'}} queue</button>
       <table v-show="showQueue">
         <thead>
         <tr>
@@ -23,17 +23,17 @@
         <tbody>
         <tr v-for="(t, i) in queue">
           <td>{{i + 1}}</td>
-          <td>{{tracks[t].title}}</td>
-          <td>{{tracks[t].artist}}</td>
-          <td>{{tracks[t].album}}</td>
-          <td>{{tracks[t].duration | timecode}}</td>
+          <td>{{t.title}}</td>
+          <td>{{t.artist}}</td>
+          <td>{{t.album}}</td>
+          <td>{{t.duration | timecode}}</td>
         </tr>
         </tbody>
       </table>
     </div>
 
     <div>
-      <audio id="player" :src="currentTrack ? apiRoot + 'tracks/' + currentTrack + '/stream' : ''" preload="auto"
+      <audio id="player" :src="currentTrack ? apiRoot + 'tracks/' + currentTrack._id + '/stream' : ''" preload="auto"
              controls autoplay></audio>
       <span>
         <button v-on:click="clearQueue">clear queue</button>
@@ -47,6 +47,8 @@
     </div>
 
     <div>
+      <button v-on:click="">prev</button>
+      <button v-on:click="">next</button>
       <table>
         <thead>
         <tr>
@@ -58,7 +60,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="(t, k, i) in tracks" v-on:click="addTracksToQueue([t._id])">
+        <tr v-for="(t, k, i) in tracks" v-on:click="addTracksToQueue([t])">
           <td> {{ i + 1 }}</td>
           <td>
               <span>
@@ -81,7 +83,6 @@
 <script>
   import {mapGetters, mapActions} from 'vuex'
   import debounce from 'lodash.debounce'
-  import store from '../store'
 
   export default {
     data: function () {
@@ -108,10 +109,14 @@
         'nextSong',
         'clearQueue',
         'updateApiRoot',
-        'toggleQueue'
+        'toggleQueue',
+        'setTrackIndex'
       ]),
       debounceGetTracks: debounce(function () {
         this.getTracks(this.query)
+      }, 500),
+      debounceApiRoot: debounce(function () {
+        this.updateApiRoot(this.userApiRoot)
       }, 500)
     },
     watch: {
@@ -119,7 +124,7 @@
         this.debounceGetTracks()
       },
       userApiRoot: function () {
-        this.updateApiRoot(store, this.userApiRoot)
+        this.debounceApiRoot()
       }
     },
     mounted: function () {
